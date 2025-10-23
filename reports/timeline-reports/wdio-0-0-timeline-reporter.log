@@ -1,0 +1,21 @@
+{
+  "start": "2025-10-23T18:19:04.254Z",
+  "end": "2025-10-23T18:19:04.258Z",
+  "capabilities": {
+    "browserName": "chrome"
+  },
+  "framework": "cucumber",
+  "mochaOpts": {
+    "timeout": 10000
+  },
+  "duration": 4,
+  "suites": [],
+  "specs": [
+    "file:///home/altakis/dev/epam_atjs/bdd_exp/src/features/login.feature"
+  ],
+  "state": {
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  }
+}

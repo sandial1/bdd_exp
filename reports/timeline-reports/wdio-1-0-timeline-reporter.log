@@ -1,0 +1,30 @@
+{
+  "start": "2025-10-23T18:19:09.144Z",
+  "end": "2025-10-23T18:19:09.147Z",
+  "capabilities": {
+    "browserName": "firefox",
+    "acceptInsecureCerts": true,
+    "moz:firefoxOptions": {
+      "binary": "/usr/bin/firefox",
+      "args": [
+        "-headless",
+        "-profile",
+        "/tmp/firefox-profile"
+      ]
+    }
+  },
+  "framework": "cucumber",
+  "mochaOpts": {
+    "timeout": 10000
+  },
+  "duration": 3,
+  "suites": [],
+  "specs": [
+    "file:///home/altakis/dev/epam_atjs/bdd_exp/src/features/login.feature"
+  ],
+  "state": {
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  }
+}
