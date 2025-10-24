@@ -9,7 +9,24 @@ out of the test environment dependencies.
 - Using chrome, firefox and edge drivers for cross browser testing.
 - Cucumber framework setup for BDD based testing.
 
-## Scripts
+## Useful commands and utilities
+### Docker
+This project is written to run inside a container and thus needs some maintenace when changes are made to it.
+Since we use volumes project file changes should be seamless but just in case we need to update either the Dockerfile or
+docker-compose.yaml, then we need to run:
+```bash
+docker compose build
+```
+The development environment is then accessed first by creating or recreating the container with:
+```bash
+sudo docker run -it bdd_exp-wdio bash -n devwork 
+```
+If we simply need to run the container then
+```bash
+sudo docker start -ai devwork
+```
+
+### Scripts
 
 Inside the directory scripts/ there are a series of utilities to check over the development files:
 
