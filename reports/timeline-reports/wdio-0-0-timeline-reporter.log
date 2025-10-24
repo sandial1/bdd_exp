@@ -1,31 +1,156 @@
 {
-  "start": "2025-10-24T04:34:11.902Z",
-  "end": "2025-10-24T04:34:11.906Z",
+  "start": "2025-10-24T19:50:44.487Z",
+  "end": "2025-10-24T19:50:52.675Z",
   "capabilities": {
+    "acceptInsecureCerts": true,
     "browserName": "chrome",
-    "goog:chromeOptions": {
-      "args": [
-        "--headless",
-        "--disable-gpu",
-        "--window-size=1920,1080"
-      ],
-      "prefs": {
-        "profile.password_manager_leak_detection": false
-      }
+    "browserVersion": "141.0.7390.122",
+    "chrome": {
+      "chromedriverVersion": "141.0.7390.122 (b477534e7e10d193e916cd4e2967c589383625b2-refs/branch-heads/7390@{#2667})",
+      "userDataDir": "/tmp/chrome-user-data"
     },
-    "acceptInsecureCerts": true
+    "fedcm:accounts": true,
+    "goog:chromeOptions": {
+      "debuggerAddress": "localhost:33619"
+    },
+    "networkConnectionEnabled": false,
+    "pageLoadStrategy": "normal",
+    "platformName": "linux",
+    "proxy": {},
+    "setWindowRect": true,
+    "strictFileInteractability": false,
+    "timeouts": {
+      "implicit": 0,
+      "pageLoad": 300000,
+      "script": 30000
+    },
+    "unhandledPromptBehavior": "ignore",
+    "webSocketUrl": "ws://localhost:9515/session/684de6e5407609142bbc190810174df6",
+    "webauthn:extension:credBlob": true,
+    "webauthn:extension:largeBlob": true,
+    "webauthn:extension:minPinLength": true,
+    "webauthn:extension:prf": true,
+    "webauthn:virtualAuthenticators": true,
+    "sessionId": "684de6e5407609142bbc190810174df6"
   },
+  "host": "localhost",
+  "port": 9515,
   "framework": "cucumber",
   "mochaOpts": {
     "timeout": 10000
   },
-  "duration": 4,
-  "suites": [],
+  "duration": 8188,
+  "suites": [
+    {
+      "title": "As a user, I can log into the secure area",
+      "duration": 6185,
+      "start": "2025-10-24T19:50:44.585Z",
+      "end": "2025-10-24T19:50:50.770Z",
+      "tests": [
+        {
+          "title": "Given I am on the login page",
+          "start": "2025-10-24T19:50:44.589Z",
+          "end": "2025-10-24T19:50:49.964Z",
+          "duration": 5375,
+          "state": "passed",
+          "screenshots": []
+        },
+        {
+          "title": "When I login with tomsmith and SuperSecretPassword!",
+          "start": "2025-10-24T19:50:49.965Z",
+          "end": "2025-10-24T19:50:50.696Z",
+          "duration": 731,
+          "state": "passed",
+          "screenshots": []
+        },
+        {
+          "title": "Then I should see a flash message saying You logged into a secure area!",
+          "start": "2025-10-24T19:50:50.697Z",
+          "end": "2025-10-24T19:50:50.768Z",
+          "duration": 71,
+          "state": "passed",
+          "screenshots": []
+        }
+      ],
+      "hooks": [
+        {
+          "start": "2025-10-24T19:50:44.586Z",
+          "end": "2025-10-24T19:50:44.588Z",
+          "duration": 2,
+          "title": "",
+          "associatedSuite": "0"
+        },
+        {
+          "start": "2025-10-24T19:50:50.769Z",
+          "end": "2025-10-24T19:50:50.769Z",
+          "duration": 0,
+          "title": "",
+          "associatedSuite": "0"
+        }
+      ]
+    },
+    {
+      "title": "As a user, I can log into the secure area",
+      "duration": 842,
+      "start": "2025-10-24T19:50:50.771Z",
+      "end": "2025-10-24T19:50:51.613Z",
+      "tests": [
+        {
+          "title": "Given I am on the login page",
+          "start": "2025-10-24T19:50:50.771Z",
+          "end": "2025-10-24T19:50:50.968Z",
+          "duration": 197,
+          "state": "passed",
+          "screenshots": []
+        },
+        {
+          "title": "When I login with foobar and barfoo",
+          "start": "2025-10-24T19:50:50.968Z",
+          "end": "2025-10-24T19:50:51.553Z",
+          "duration": 585,
+          "state": "passed",
+          "screenshots": []
+        },
+        {
+          "title": "Then I should see a flash message saying Your username is invalid!",
+          "start": "2025-10-24T19:50:51.555Z",
+          "end": "2025-10-24T19:50:51.612Z",
+          "duration": 57,
+          "state": "passed",
+          "screenshots": []
+        }
+      ],
+      "hooks": [
+        {
+          "start": "2025-10-24T19:50:50.771Z",
+          "end": "2025-10-24T19:50:50.771Z",
+          "duration": 0,
+          "title": "",
+          "associatedSuite": "1"
+        },
+        {
+          "start": "2025-10-24T19:50:51.613Z",
+          "end": "2025-10-24T19:50:51.613Z",
+          "duration": 0,
+          "title": "",
+          "associatedSuite": "1"
+        }
+      ]
+    },
+    {
+      "title": "The Internet Guinea Pig Website",
+      "duration": 7044,
+      "start": "2025-10-24T19:50:44.570Z",
+      "end": "2025-10-24T19:50:51.614Z",
+      "tests": [],
+      "hooks": []
+    }
+  ],
   "specs": [
-    "file:///home/altakis/dev/epam_atjs/bdd_exp/src/features/login.feature"
+    "file:///usr/src/app/src/features/login.feature"
   ],
   "state": {
-    "passed": 0,
+    "passed": 6,
     "failed": 0,
     "skipped": 0
   }

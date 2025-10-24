@@ -15,8 +15,9 @@ services:
     ports:
       - '9222:9222' # for debugging Chrome headless if needed
     shm_size: '2gb' # prevent Chrome crashes due to low shared memory
-    command: >
-      sh -c "Xvfb :99 -screen 0 1280x1024x24 & pnpm test"
+    tty: true
+    stdin_open: true
+    command: 'tail -f /dev/null'
 
 volumes:
   pnpm_store:

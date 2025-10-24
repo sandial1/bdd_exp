@@ -21,16 +21,11 @@ docker-compose.yaml, then we need to run:
 docker compose build
 ```
 
-The development environment is then accessed first by creating or recreating the container with:
+The development environment is then accessed by running compose:
 
 ```bash
-sudo docker run -it bdd_exp-wdio bash -n devwork
-```
-
-If we simply need to run the container then
-
-```bash
-sudo docker start -ai devwork
+docker compose up -d
+docker compose exec wdio bash
 ```
 
 ### Scripts

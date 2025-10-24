@@ -70,12 +70,13 @@ export const config = {
     //      browserName: 'firefox',
     //      'moz:firefoxOptions': {
     //        binary: '/usr/bin/firefox',
-    //      args:['--no-sandbox', '--disable-gpu'],
+    //        args: ['--no-sandbox', '--disable-gpu', '--headless'],
     //      },
     //    },
-    //    {
+    //  {
     //      browserName: 'edge',
-    //    },
+
+    //      },
   ],
   services: ['chromedriver'],
 

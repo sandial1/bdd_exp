@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     libxcomposite1 \
     libasound2 \
+    nano \
+    vim  \
     && rm -rf /var/lib/apt/lists/*
 
 # Environment for Chrome
