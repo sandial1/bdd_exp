@@ -30,7 +30,7 @@ ENV CHROME_BIN=/usr/bin/chromium \
 WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install
+RUN pnpm install --dangerously-allow-all-builds
 COPY . .
 
 # Optional: expose Chrome debug port
