@@ -1,8 +1,19 @@
 {
-  "start": "2025-10-23T18:19:04.254Z",
-  "end": "2025-10-23T18:19:04.258Z",
+  "start": "2025-10-24T04:34:11.902Z",
+  "end": "2025-10-24T04:34:11.906Z",
   "capabilities": {
-    "browserName": "chrome"
+    "browserName": "chrome",
+    "goog:chromeOptions": {
+      "args": [
+        "--headless",
+        "--disable-gpu",
+        "--window-size=1920,1080"
+      ],
+      "prefs": {
+        "profile.password_manager_leak_detection": false
+      }
+    },
+    "acceptInsecureCerts": true
   },
   "framework": "cucumber",
   "mochaOpts": {

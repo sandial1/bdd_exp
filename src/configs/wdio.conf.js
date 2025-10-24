@@ -1,8 +1,6 @@
 import HtmlReporter from '@rpii/wdio-html-reporter';
 import { generate } from 'wdio-cucumberjs-json-reporter';
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
+
 export const config = {
   //
   // ====================
@@ -55,24 +53,37 @@ export const config = {
   capabilities: [
     {
       browserName: 'chrome',
-
       'goog:chromeOptions': {
-        args: ['--headless', '--disable-gpu', '--window-size=1920,1080'],
-        prefs: {
-          'profile.password_manager_leak_detection': false,
-        },
+        binary: '/usr/bin/chromium',
+        args: [
+          '--headless',
+          '--disable-gpu',
+          '--no-sandbox',
+          '--disable-dev-shm-usage',
+          '--window-size=1920,1080',
+          '--user-data-dir=/tmp/chrome-user-data',
+        ],
       },
       acceptInsecureCerts: true,
     },
-    {
-      browserName: 'firefox',
-      acceptInsecureCerts: true,
-      'moz:firefoxOptions': {
-        binary: '/usr/bin/firefox',
-        args: ['-headless'],
-      },
-    },
+    //    {
+    //      browserName: 'firefox',
+    //      'moz:firefoxOptions': {
+    //        binary: '/usr/bin/firefox',
+    //      args:['--no-sandbox', '--disable-gpu'],
+    //      },
+    //    },
+    //    {
+    //      browserName: 'edge',
+    //    },
   ],
+  services: ['chromedriver'],
+
+  chromedriver: {
+    logFileName: 'wdio-chromedriver.log',
+    outputDir: 'logs',
+    args: ['--silent'],
+  },
 
   //
   // ===================
@@ -261,19 +272,6 @@ export const config = {
    */
   // before: function (capabilities, specs) {
   // },
-  before: function (config, capabilities, specs) {
-    // Chrome unique user-data-dir per session
-    if (capabilities.browserName === 'chrome') {
-      const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'chrome-profile-'));
-      capabilities['goog:chromeOptions'].args.push(`--user-data-dir=${tmpProfile}`);
-    }
-
-    // Firefox unique profile per session
-    if (capabilities.browserName === 'firefox') {
-      const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'firefox-profile-'));
-      capabilities['moz:firefoxOptions'].args.push('-profile', tmpProfile);
-    }
-  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name
