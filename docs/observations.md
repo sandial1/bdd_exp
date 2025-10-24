@@ -27,3 +27,11 @@ pnpm install --dangerously-allow-all-builds
 
 This is counter productive in the sense that while it allows me to get everything setup properly it bypasses many
 security intended checks.
+
+## Docker and docker compose
+
+There were a number of issues in this transition from local dev to docker file:
+
+- For the longest time I forgot that I created the images with docker compose build but ran it with docker run as such
+  the container did not load the volume configuration and the fine tunes I made inside it did not persis... which just
+  means I need to practice more with docker compose itself
