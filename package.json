@@ -21,6 +21,9 @@
     "prettier": "^3.6.2",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-cucumberjs-json-reporter": "^6.0.1",
+    "wdio-devtools-service": "^0.1.6",
+    "wdio-edgedriver-service": "^3.0.3",
+    "wdio-geckodriver-service": "^5.0.2",
     "wdio-timeline-reporter": "^5.1.4",
     "webdriver": "^9.20.0"
   },
@@ -30,6 +33,9 @@
     "lint-check": "prettier --check ."
   },
   "dependencies": {
-    "chromedriver": "^141.0.4"
+    "chromedriver": "^141.0.4",
+    "devtools": "^8.42.0",
+    "edgedriver": "^6.1.2",
+    "geckodriver": "^6.0.2"
   }
 }

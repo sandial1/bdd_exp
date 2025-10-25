@@ -1,0 +1,27 @@
+services:
+  wdio:
+    build: .
+    container_name: wdio-local
+    working_dir: /usr/src/app
+    # bind project source for live dev; keep node_modules as a named volume to avoid host overwrite
+    volumes:
+      - .:/usr/src/app
+      - pnpm_store:/home/wdio/.local/share/pnpm
+      - node_modules:/usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHROME_BIN=/usr/bin/chromium
+      - CHROME_PATH=/usr/lib/chromium/
+      - DISPLAY=:99
+    ports:
+      - '9222:9222'
+    shm_size: '2gb'
+    # map host UID/GID to container to avoid permission issues (export UID/GID on host)
+    user: '${UID:-1000}:${GID:-1000}'
+    stdin_open: true
+    tty: true
+    # default command from image will run tests; to keep container alive for "docker-compose exec" use: command: tail -f /dev/null
+
+volumes:
+  pnpm_store:
+  node_modules:

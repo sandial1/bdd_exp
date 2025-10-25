@@ -1,6 +1,3 @@
-import HtmlReporter from '@rpii/wdio-html-reporter';
-import { generate } from 'wdio-cucumberjs-json-reporter';
-
 export const config = {
   //
   // ====================
@@ -50,13 +47,18 @@ export const config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
+  // Use devtools for Chromium and geckodriver for Firefox (smaller than installing all drivers).
+  // If you prefer drivers for all three, set services: ['chromedriver','geckodriver','edgedriver']
+  services: ['devtools'],
+
   capabilities: [
+    // Chrome / Chromium (CDP via devtools)
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        binary: '/usr/bin/chromium',
+        binary: process.env.CHROME_BIN || '/usr/bin/chromium',
         args: [
-          '--headless',
+          '--headless=new',
           '--disable-gpu',
           '--no-sandbox',
           '--disable-dev-shm-usage',
@@ -65,26 +67,39 @@ export const config = {
         ],
       },
       acceptInsecureCerts: true,
+      maxInstances: 2,
     },
-    //    {
-    //      browserName: 'firefox',
-    //      'moz:firefoxOptions': {
-    //        binary: '/usr/bin/firefox',
-    //        args: ['--no-sandbox', '--disable-gpu', '--headless'],
-    //      },
-    //    },
-    //  {
-    //      browserName: 'edge',
 
-    //      },
+    // Firefox (uses geckodriver)
+    /* {
+      browserName: 'firefox',
+      'moz:firefoxOptions': {
+        binary: process.env.FIREFOX_BIN || '/usr/bin/firefox',
+        args: ['-headless', '--width=1920', '--height=1080'],
+      },
+      acceptInsecureCerts: true,
+      maxInstances: 1,
+    }, */
+
+    // Edge (Chromium-based). If using devtools, devtools can control Edge if binary exposes remote debugging.
+    // Alternatively use edgedriver service and msedgedriver binary.
+    {
+      browserName: 'chrome',
+      browserVersion: 'edge',
+      'goog:chromeOptions': {
+        binary: process.env.EDGE_BIN || '/usr/bin/microsoft-edge',
+        args: [
+          '--headless=new',
+          '--disable-gpu',
+          '--no-sandbox',
+          '--disable-dev-shm-usage',
+          '--window-size=1920,1080',
+        ],
+      },
+      acceptInsecureCerts: true,
+      maxInstances: 1,
+    },
   ],
-  services: ['chromedriver'],
-
-  chromedriver: {
-    logFileName: 'wdio-chromedriver.log',
-    outputDir: 'logs',
-    args: ['--silent'],
-  },
 
   //
   // ===================
@@ -171,7 +186,7 @@ export const config = {
       },
     ],
     [
-      HtmlReporter,
+      'HtmlReporter',
       {
         debug: false,
         outputDir: './reports/html-reports',
@@ -194,7 +209,7 @@ export const config = {
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
-    require: ['src/features/step-definitions/steps.js'],
+    require: ['src/features/step-definitions/*steps.js'],
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

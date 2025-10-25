@@ -1,11 +1,16 @@
-# Use Debian-based Node image (not Alpine)
 FROM node:22-bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    CHROME_BIN=/usr/bin/chromium \
+    CHROME_PATH=/usr/lib/chromium/ \
+    NODE_ENV=development \
+    DISPLAY=:99
 
 # Enable pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Install Chrome and XVFB
-RUN apt-get update && apt-get install -y \
+# Install Chromium + Xvfb and minimal runtime deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     xvfb \
     fonts-liberation \
@@ -19,24 +24,34 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     libxcomposite1 \
     libasound2 \
+    ca-certificates \
     nano \
-    vim  \
+    vim \
     && rm -rf /var/lib/apt/lists/*
-
-# Environment for Chrome
-ENV CHROME_BIN=/usr/bin/chromium \
-    CHROME_PATH=/usr/lib/chromium/ \
-    NODE_ENV=development \
-    DISPLAY=:99
 
 WORKDIR /usr/src/app
 
+# leverage Docker layer cache for deps
 COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install --dangerously-allow-all-builds
+
+RUN pnpm install --frozen-lockfile
+
 COPY . .
 
-# Optional: expose Chrome debug port
+# create non-root user and fix ownership
+#RUN groupadd -r wdio && useradd -r -g wdio -s /usr/sbin/nologin wdio \
+#    && chown -R wdio:wdio /usr/src/app
+RUN groupadd -r wdio && useradd -r -g wdio -s /usr/sbin/nologin wdio
+
+# add entrypoint to start Xvfb
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 9222
 
-# Default command: run WDIO under virtual display
-CMD sh -c "Xvfb :99 -screen 0 1280x1024x24 & pnpm test"
+HEALTHCHECK --interval=1m --timeout=10s --start-period=10s CMD pgrep Xvfb || exit 1
+
+USER wdio
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["pnpm","test"]
